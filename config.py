@@ -13,7 +13,7 @@ class Settings(BaseSettings):
 
     @property
     def db_url(self) -> str:
-        return '{db_engine}://{db_user}:{db_password}@{db_host}/{db_name}'.format(**self.__dict__)
+        return '{db_engine}+asyncpg://{db_user}:{db_password}@{db_host}/{db_name}'.format(**self.__dict__)
 
 
 settings = Settings()
