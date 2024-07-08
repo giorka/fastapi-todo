@@ -1,0 +1,7 @@
+fastapi==0.111.0
+pydantic-settings==2.3.4
+pydantic==2.8.2
+dishka==1.2.0
+SQLAlchemy==2.0.31
+uvicorn==0.30.1
+alembic==1.13.2
