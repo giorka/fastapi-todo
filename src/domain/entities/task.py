@@ -1,6 +1,8 @@
+from dataclasses import dataclass
+
 from domain.entities.base import BaseEntity
 
 
+@dataclass
 class TaskEntity(BaseEntity):
-    id: int
     content: str

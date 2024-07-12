@@ -1,6 +1,6 @@
 from typing import AsyncIterable
 
-from dishka import make_container, provide, Provider, Scope
+from dishka import provide, Provider, Scope
 from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncEngine, AsyncSession, create_async_engine
 
 from config import settings
@@ -33,4 +33,3 @@ class DatabaseProvider(Provider):
 
 
 db_provider = DatabaseProvider()
-db_container = make_container(db_provider)
