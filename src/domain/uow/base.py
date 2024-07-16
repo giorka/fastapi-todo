@@ -1,19 +1,23 @@
-from abc import abstractmethod, ABC
+from abc import ABC
+from dataclasses import dataclass
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
 
+@dataclass
 class AbstractUnitOfWork(ABC):
-    def __init__(self, session: AsyncSession) -> None:
-        self._session = session
+    _session: AsyncSession
 
-    def __exit__(self, *args, **kwargs) -> None:
-        self.rollback()
-
-    @abstractmethod
-    def commit(self) -> None:
+    def commit(self, *args, **kwargs) -> None:
         raise NotImplementedError()
 
-    @abstractmethod
-    def rollback(self) -> None:
+    def rollback(self, *args, **kwargs) -> None:
+        raise NotImplementedError()
+
+
+class AsyncAbstractUnitOfWork(AbstractUnitOfWork):
+    async def commit(self, *args, **kwargs) -> None:
+        raise NotImplementedError()
+
+    async def rollback(self, *args, **kwargs) -> None:
         raise NotImplementedError()

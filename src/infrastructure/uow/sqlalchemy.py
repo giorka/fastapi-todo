@@ -1,13 +1,7 @@
-from domain.uow.base import AbstractUnitOfWork
+from domain.uow.base import AsyncAbstractUnitOfWork
 
 
-class SQLAlchemyUnitOfWork(AbstractUnitOfWork):
-    async def __aenter__(self, *args, **kwargs) -> 'SQLAlchemyUnitOfWork':
-        return self
-
-    async def __aexit__(self, *args, **kwargs) -> None:
-        await self.rollback()
-
+class SQLAlchemyUnitOfWork(AsyncAbstractUnitOfWork):
     async def commit(self) -> None:
         await self._session.commit()
 

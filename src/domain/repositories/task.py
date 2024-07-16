@@ -1,7 +1,7 @@
 from abc import ABC
 
-from domain.repositories.base import BaseRepository
+from domain.repositories.base import AbstractRepository
 
 
-class BaseTaskRepository(BaseRepository, ABC):
+class AbstractTaskRepository(AbstractRepository, ABC):
     ...

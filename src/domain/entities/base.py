@@ -1,6 +1,5 @@
-from dataclasses import dataclass
+from pydantic import BaseModel
 
 
-@dataclass
-class BaseEntity:
+class IEntity(BaseModel):
     ...

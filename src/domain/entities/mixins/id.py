@@ -1,0 +1,2 @@
+class IDFieldMixin:
+    id: int

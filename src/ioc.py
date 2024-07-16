@@ -4,7 +4,6 @@ from dishka import provide, Provider, Scope
 from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncEngine, AsyncSession, create_async_engine
 
 from config import settings
-from domain.repositories.task import BaseTaskRepository
 from domain.services.task import TaskService
 from infrastructure.repositories.task import TaskRepository
 from infrastructure.uow.sqlalchemy import SQLAlchemyUnitOfWork
@@ -39,13 +38,13 @@ class DatabaseProvider(Provider):
 
 class RepositoryProvider(Provider):
     @provide(scope=Scope.REQUEST)
-    def get_task_repository(self, session: AsyncSession) -> BaseTaskRepository:
+    def get_task_repository(self, session: AsyncSession) -> TaskRepository:
         return TaskRepository(session)
 
 
 class ServiceProvider(Provider):
     @provide(scope=Scope.REQUEST)
-    def get_task_service(self, task_repository: BaseTaskRepository) -> TaskService:
+    def get_task_service(self, task_repository: TaskRepository) -> TaskService:
         return TaskService(task_repository, SQLAlchemyUnitOfWork(task_repository.session))
 
 

@@ -1,13 +1,10 @@
-from dataclasses import dataclass
+from domain.entities.base import IEntity
+from domain.entities.mixins.id import IDFieldMixin
 
-from domain.entities.base import BaseEntity
 
-
-@dataclass
-class CreateTaskEntity(BaseEntity):
+class TaskEntity(IEntity):
     content: str
 
 
-@dataclass
-class RetrieveTaskEntity(CreateTaskEntity):
+class RetrieveTaskEntity(TaskEntity, IDFieldMixin):
     id: int
