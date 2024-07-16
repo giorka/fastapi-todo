@@ -1,5 +1,9 @@
 from pydantic import BaseModel, constr
 
 
-class TaskSchema(BaseModel):
+class CreateTaskSchema(BaseModel):
     content: constr(max_length=256)
+
+
+class RetrieveTaskSchema(CreateTaskSchema):
+    id: int

@@ -1,24 +1,29 @@
 from __future__ import annotations
 
-from domain.entities.base import BaseEntity
-from domain.repositories.base import BaseRepository
-from infrastructure import models
 from dataclasses import asdict
 
+from domain.entities.base import BaseEntity
+from domain.entities.lazy import LazyEntity
+from domain.entities.task import CreateTaskEntity
+from domain.repositories.task import BaseTaskRepository
+# TODO: optimize imports
+from infrastructure import models
 
-class TaskRepository(BaseRepository):
-    def add(self, entity: BaseEntity) -> BaseEntity:
-        task = models.Task(**asdict(entity))
+
+class TaskRepository(BaseTaskRepository):
+    def add(self, entity: BaseEntity) -> LazyEntity:
+        entity_dict = asdict(entity)
+        task = models.Task(**entity_dict)
 
         self.session.add(task)
 
-        return entity
+        return LazyEntity(data_source=task.__dict__)
 
-    def get(self, specification: ...) -> BaseEntity:
+    def get(self, specification: ...) -> CreateTaskEntity:
         raise NotImplementedError()
 
-    def filter(self, specification: ...) -> list[BaseEntity]:
+    def filter(self, specification: ...) -> list[CreateTaskEntity]:
         raise NotImplementedError()
 
-    def all(self) -> list[BaseEntity]:
+    def all(self) -> list[CreateTaskEntity]:
         raise NotImplementedError()

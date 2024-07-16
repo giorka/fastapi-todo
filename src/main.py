@@ -4,14 +4,14 @@ from dishka.integrations.fastapi import setup_dishka
 from fastapi import APIRouter, FastAPI
 
 from apps.tasks.routes import router as tasks_router
-from ioc import db_provider
+from ioc import db_provider, repository_provider, service_provider
 
 app = FastAPI()
 router = APIRouter(prefix='/api/v1')
 router.include_router(tasks_router, prefix='/tasks')
 app.include_router(router)
 
-container = make_async_container(db_provider)
+container = make_async_container(db_provider, repository_provider, service_provider)
 setup_dishka(container, app)
 
 if __name__ == '__main__':

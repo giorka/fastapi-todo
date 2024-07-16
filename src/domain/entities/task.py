@@ -4,5 +4,10 @@ from domain.entities.base import BaseEntity
 
 
 @dataclass
-class TaskEntity(BaseEntity):
+class CreateTaskEntity(BaseEntity):
     content: str
+
+
+@dataclass
+class RetrieveTaskEntity(CreateTaskEntity):
+    id: int

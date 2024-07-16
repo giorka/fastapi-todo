@@ -1,10 +1,9 @@
 from dishka import FromDishka
 from dishka.integrations.fastapi import inject
 from fastapi import APIRouter
-from sqlalchemy.ext.asyncio import AsyncSession
 
-from domain.entities.task import TaskEntity
-from infrastructure.repositories.task import TaskRepository
+from domain.entities.task import CreateTaskEntity
+from domain.services.task import TaskService
 from . import schemas
 
 router = APIRouter()
@@ -12,9 +11,8 @@ router = APIRouter()
 
 @router.post('/')
 @inject
-async def add_task(task: schemas.TaskSchema, session: FromDishka[AsyncSession]) -> schemas.TaskSchema:
-    repository = TaskRepository(session)
-    repository.add(TaskEntity(**dict(task)))
-    await session.commit()
+async def add_task(task: schemas.CreateTaskSchema, service: FromDishka[TaskService]) -> schemas.RetrieveTaskSchema:
+    entity = CreateTaskEntity(**dict(task))
+    created_task = await service.new_task(entity)
 
-    return task
+    return schemas.RetrieveTaskSchema(**created_task.__dict__)
