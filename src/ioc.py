@@ -6,7 +6,6 @@ from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncEngine, AsyncSession
 from config import settings
 from domain.services.task import TaskService
 from infrastructure.repositories.task import TaskRepository
-from infrastructure.uow.sqlalchemy import SQLAlchemyUnitOfWork
 
 
 class DatabaseProvider(Provider):
@@ -32,7 +31,6 @@ class DatabaseProvider(Provider):
 
         yield session
 
-        print('log')
         await session.close()
 
 
@@ -45,9 +43,4 @@ class RepositoryProvider(Provider):
 class ServiceProvider(Provider):
     @provide(scope=Scope.REQUEST)
     def get_task_service(self, task_repository: TaskRepository) -> TaskService:
-        return TaskService(task_repository, SQLAlchemyUnitOfWork(task_repository.session))
-
-
-db_provider = DatabaseProvider()
-repository_provider = RepositoryProvider()
-service_provider = ServiceProvider()
+        return TaskService(task_repository, task_repository.session)

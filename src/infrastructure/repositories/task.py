@@ -13,12 +13,3 @@ class TaskRepository(AbstractTaskRepository):
         self.session.add(task)
 
         return GetEntityBuilder(RetrieveTaskEntity, data_src=task.__dict__)
-
-    def get(self, specification: ...) -> RetrieveTaskEntity:
-        raise NotImplementedError()
-
-    def filter(self, specification: ...) -> list[RetrieveTaskEntity]:
-        raise NotImplementedError()
-
-    def all(self) -> list[RetrieveTaskEntity]:
-        raise NotImplementedError()

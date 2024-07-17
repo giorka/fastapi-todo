@@ -5,7 +5,7 @@ from fastapi import APIRouter
 from domain.entities.task import TaskEntity, RetrieveTaskEntity
 from domain.services.task import TaskService
 
-router = APIRouter()
+router = APIRouter(prefix='/tasks')
 
 
 @router.post('/')
