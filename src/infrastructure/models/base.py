@@ -14,4 +14,4 @@ def to_snake_case(string: str) -> str:
 class IModel(DeclarativeBase):
     @declared_attr
     def __tablename__(self) -> str:
-        return to_snake_case(self.__name__)
+        return to_snake_case(self.__name__.lower().strip('model'))

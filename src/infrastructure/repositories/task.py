@@ -6,11 +6,11 @@ from infrastructure import datamappers, models, repositories
 
 
 class TaskRepository(repositories.SQLRepository, AbstractTaskRepository):
-    def add(self, entity: entities.TaskEntity) -> entities.RetrieveTaskEntity:
+    async def add(self, entity: entities.TaskEntity) -> entities.RetrieveTaskEntity:
         task_model = datamappers.task.entity_to_model(entity)
 
         self.session.add(task_model)
-        self.session.flush()
+        await self.session.flush()
 
         return datamappers.task.model_to_entity(task_model)
 

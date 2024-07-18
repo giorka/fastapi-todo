@@ -5,7 +5,7 @@ from domain import entities, repositories
 
 class AbstractTaskRepository(repositories.AbstractRepository):
     @abstractmethod
-    def add(self, entity: entities.TaskEntity) -> entities.RetrieveTaskEntity:
+    async def add(self, entity: entities.TaskEntity) -> entities.RetrieveTaskEntity:
         raise NotImplementedError()
 
     @abstractmethod
