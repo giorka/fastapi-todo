@@ -11,8 +11,11 @@ class TaskService:
     _uow: AsyncUnitOfWork
 
     async def save(self, entity: TaskEntity) -> RetrieveTaskEntity:
-        get_entity = self._repository.add(entity)
+        entity = self._repository.add(entity)
 
         await self._uow.commit()
 
-        return get_entity()
+        return entity
+
+    async def all(self) -> list[RetrieveTaskEntity]:
+        return await self._repository.all()

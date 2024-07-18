@@ -6,7 +6,7 @@ from sqlalchemy import pool
 
 from config import settings
 from infrastructure.models import *  # noqa
-from infrastructure.models.base import Base
+from infrastructure.models.base import IModel
 
 config = context.config
 
@@ -20,7 +20,7 @@ for name, value in options.items():
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-target_metadata = Base.metadata
+target_metadata = IModel.metadata
 
 
 def run_migrations_offline() -> None:
