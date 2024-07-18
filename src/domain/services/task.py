@@ -1,13 +1,13 @@
 from dataclasses import dataclass
 
 from domain.entities.task import RetrieveTaskEntity, TaskEntity
+from domain.repositories.task import AbstractTaskRepository
 from domain.uow import AsyncUnitOfWork
-from infrastructure.repositories.task import TaskRepository
 
 
 @dataclass
 class TaskService:
-    _repository: TaskRepository
+    _repository: AbstractTaskRepository
     _uow: AsyncUnitOfWork
 
     async def save(self, entity: TaskEntity) -> RetrieveTaskEntity:
