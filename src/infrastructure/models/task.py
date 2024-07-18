@@ -1,8 +1,8 @@
 from sqlalchemy import Column, Integer, String
 
-from infrastructure.models.base import IModel
+from infrastructure import models
 
 
-class TaskModel(IModel):
+class TaskModel(models.IModel):
     id = Column(Integer(), primary_key=True)
     content = Column(String(length=255))

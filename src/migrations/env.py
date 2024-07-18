@@ -6,7 +6,6 @@ from sqlalchemy import pool
 
 from config import settings
 from infrastructure.models import *  # noqa
-from infrastructure.models.base import IModel
 
 config = context.config
 

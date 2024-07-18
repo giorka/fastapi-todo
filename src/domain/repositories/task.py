@@ -1,14 +1,13 @@
 from abc import abstractmethod
 
-from domain.entities.task import RetrieveTaskEntity, TaskEntity
-from domain.repositories.abstract import AbstractRepository
+from domain import entities, repositories
 
 
-class AbstractTaskRepository(AbstractRepository):
+class AbstractTaskRepository(repositories.AbstractRepository):
     @abstractmethod
-    def add(self, entity: TaskEntity) -> RetrieveTaskEntity:
+    def add(self, entity: entities.TaskEntity) -> entities.RetrieveTaskEntity:
         raise NotImplementedError()
 
     @abstractmethod
-    async def all(self) -> list[RetrieveTaskEntity]:
+    async def all(self) -> list[entities.RetrieveTaskEntity]:
         raise NotImplementedError()

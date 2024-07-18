@@ -1,21 +1,20 @@
 from dataclasses import dataclass
 
-from domain.entities.task import RetrieveTaskEntity, TaskEntity
-from domain.repositories.task import AbstractTaskRepository
+from domain import entities, repositories
 from domain.uow import AsyncUnitOfWork
 
 
 @dataclass
 class TaskService:
-    _repository: AbstractTaskRepository
+    _repository: repositories.AbstractTaskRepository
     _uow: AsyncUnitOfWork
 
-    async def save(self, entity: TaskEntity) -> RetrieveTaskEntity:
+    async def save(self, entity: entities.TaskEntity) -> entities.RetrieveTaskEntity:
         entity = self._repository.add(entity)
 
         await self._uow.commit()
 
         return entity
 
-    async def all(self) -> list[RetrieveTaskEntity]:
+    async def all(self) -> list[entities.RetrieveTaskEntity]:
         return await self._repository.all()

@@ -1,3 +1,1 @@
-from . import entities
-from . import repositories
-from . import services
+from . import entities, repositories, services

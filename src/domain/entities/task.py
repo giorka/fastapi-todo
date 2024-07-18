@@ -1,10 +1,9 @@
-from domain.entities.base import IEntity
-from domain.entities.mixins.id import IDFieldMixin
+from domain import entities
 
 
-class TaskEntity(IEntity):
+class TaskEntity(entities.IEntity):
     content: str
 
 
-class RetrieveTaskEntity(TaskEntity, IDFieldMixin):
+class RetrieveTaskEntity(TaskEntity, entities.mixins.IDFieldMixin):
     id: int

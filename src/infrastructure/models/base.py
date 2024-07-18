@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from sqlalchemy.orm.decl_api import DeclarativeBase, declared_attr
 
 
