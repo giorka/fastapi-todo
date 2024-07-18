@@ -4,9 +4,10 @@ from domain.entities.builder import GetEntityBuilder
 from domain.entities.task import TaskEntity, RetrieveTaskEntity
 from domain.repositories.task import AbstractTaskRepository
 from infrastructure import models
+from infrastructure.repositories.base import SQLRepository
 
 
-class TaskRepository(AbstractTaskRepository):
+class TaskRepository(SQLRepository, AbstractTaskRepository):
     def add(self, entity: TaskEntity) -> GetEntityBuilder:
         task = models.Task(**entity.dict())
 

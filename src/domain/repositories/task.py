@@ -1,11 +1,11 @@
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 
 from domain.entities.base import IEntity
 from domain.entities.builder import GetEntityBuilder
-from domain.repositories.base import IRepository
+from domain.repositories.abstract import AbstractRepository
 
 
-class AbstractTaskRepository(IRepository, ABC):
+class AbstractTaskRepository(AbstractRepository):
     @abstractmethod
     def add(self, entity: IEntity) -> GetEntityBuilder:
         raise NotImplementedError()
